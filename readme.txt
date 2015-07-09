@@ -1,3 +1,4 @@
 使用Django1.8.1+python2.7搭建博客后台
 初步实现了admin添加文章并显示
 archive按时间倒序排序
+后台添加文章支持markdown

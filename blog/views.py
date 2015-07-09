@@ -6,7 +6,7 @@ from blog.models import BlogsPost
 # Create your views here.
 def archive(request):
     posts = BlogsPost.objects.order_by('-timestamp')
-    t = loader.get_template("index.html")
+    t = loader.get_template("bootstrap.html")
     c = Context({'posts':posts,'times':posts})
     return HttpResponse(t.render(c))
 
@@ -19,11 +19,11 @@ def search(request):
         elif len(q) > 20:
             errors.append('Please enter at most 20 characters.')
         else:
-            posts = BlogsPost.objects.filter(title__icontains=q)
-            return render_to_response('resultsuccess.html',
-                {'books': posts, 'query': q})
-    return render_to_response('searchsuccess.html',
-        {'errors': errors })
+            posts = BlogsPost.objects.filter(title__icontains=q).order_by('-timestamp')
+            return render_to_response('bootstrap_search.html',
+                {'books': posts,'times': posts})     
+    return render_to_response('bootstrap_search.html'
+        )
 
 def single(request):
     t =  loader.get_template('single.html')
